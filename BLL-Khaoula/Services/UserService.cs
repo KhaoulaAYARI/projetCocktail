@@ -21,17 +21,25 @@ namespace BLL_Khaoula.Services
         {
             return _service.Get().Select(dal=>dal.ToBLL());
         }
-        public User Get(Guid id) 
+        public User GetById(Guid id) 
         {
             return _service.GetById(id).ToBLL();
         }
-        public D.User Insert(User user)
+        public Guid Insert(User user)
         {
            return _service.Insert(user.ToDAL());
+        }
+        public void Update (Guid id, User user)
+        {
+            _service.Update(id, user.ToDAL());
         }
         public void Delete(Guid id)
         {
             _service.Delete(id);
+        }
+        public Guid CheckPassword( string email,string password) 
+        { 
+            return _service.CheckPassword(email, password);
         }
     }
 }

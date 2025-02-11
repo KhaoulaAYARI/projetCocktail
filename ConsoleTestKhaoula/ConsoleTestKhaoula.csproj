@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BLL-Khaoula\BLL-Khaoula.csproj" />
     <ProjectReference Include="..\DAL-Khaoula\DAL-Khaoula.csproj" />
   </ItemGroup>
 

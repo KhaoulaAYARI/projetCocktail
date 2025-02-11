@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BLL_Khaoula.Entities;
 using D = DAL_Khaoula.Entities;
 
 namespace BLL_Khaoula.Mappers
@@ -22,9 +21,9 @@ namespace BLL_Khaoula.Mappers
                     user.First_Name, 
                     user.Last_Name, 
                     user.Email, 
-                    user.Password, 
-                    user.CreatedAt, 
-                    user.DisabledAt);
+                    user.Password
+                   
+                    );
             
         }
 

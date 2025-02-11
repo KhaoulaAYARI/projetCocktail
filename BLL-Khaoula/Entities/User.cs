@@ -16,7 +16,7 @@ namespace BLL_Khaoula.Entities
         public DateTime CreatedAt { get; set; }
         private DateTime? _disabledAt;
 
-        public User(Guid user_Id, string first_Name, string last_Name, string email, string password, DateTime createdAt, DateTime? disabledAt)
+        public User(Guid user_Id, string first_Name, string last_Name, string email, string password, DateTime createdAt)
         {
             User_Id = user_Id;
             First_Name = first_Name;
@@ -24,7 +24,14 @@ namespace BLL_Khaoula.Entities
             Email = email;
             Password = password;
             CreatedAt = createdAt;
-            _disabledAt = disabledAt;
+        }
+        public User(Guid user_Id, string first_Name, string last_Name, string email, string password)
+        {
+            User_Id = user_Id;
+            First_Name = first_Name;
+            Last_Name = last_Name;
+            Email = email;
+            Password = password;
         }
 
         public bool IsDisabledAt
