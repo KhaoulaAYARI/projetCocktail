@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTestKhaoula", "Conso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL-Khaoula", "BLL-Khaoula\BLL-Khaoula.csproj", "{32722B8F-8D75-4A67-AC55-9335242DA747}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASP_MVC", "ASP_MVC\ASP_MVC.csproj", "{FD1C065D-3A41-438B-97BE-E9A811654A5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{32722B8F-8D75-4A67-AC55-9335242DA747}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32722B8F-8D75-4A67-AC55-9335242DA747}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32722B8F-8D75-4A67-AC55-9335242DA747}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD1C065D-3A41-438B-97BE-E9A811654A5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD1C065D-3A41-438B-97BE-E9A811654A5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD1C065D-3A41-438B-97BE-E9A811654A5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD1C065D-3A41-438B-97BE-E9A811654A5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
