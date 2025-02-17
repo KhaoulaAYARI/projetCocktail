@@ -1,3 +1,5 @@
+using Commun.Repositories;
+
 namespace ASP_MVC
 {
     public class Program
@@ -9,8 +11,8 @@ namespace ASP_MVC
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             //Ajout de nos services: Ceux de la BLL et ceux de la DAL
-                            builder.Services.AddScoped<BLL_Khaoula.Services.UserService>();
-            builder.Services.AddScoped<DAL_Khaoula.Srvices.UserService>();
+            builder.Services.AddScoped < IUserRepository < BLL_Khaoula.Entities.User>,BLL_Khaoula.Services.UserService>();
+                      builder.Services.AddScoped<IUserRepository<DAL_Khaoula.Entities.User>,DAL_Khaoula.Srvices.UserService>();
 
             var app = builder.Build();
 

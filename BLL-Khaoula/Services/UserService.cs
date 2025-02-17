@@ -6,13 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using BLL_Khaoula.Mappers;
 using D=DAL_Khaoula.Entities;
+using Commun.Repositories;
 
 namespace BLL_Khaoula.Services
 {
-    public class UserService
+    public class UserService: IUserRepository<User>
     {
-        private DAL_Khaoula.Srvices.UserService _service;
-        public UserService(DAL_Khaoula.Srvices.UserService userService)
+        private IUserRepository<D.User> _service;
+        public UserService(IUserRepository<D.User> userService)
         {
             _service= userService;
         }

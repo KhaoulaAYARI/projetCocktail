@@ -1,6 +1,8 @@
 ﻿using ASP_MVC.Mappers;
 using ASP_MVC.Models.User;
+using BLL_Khaoula.Entities;
 using BLL_Khaoula.Services;
+using Commun.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,8 +10,8 @@ namespace ASP_MVC.Controllers
 {
     public class UserController : Controller
     {
-        private UserService _userService;
-        public UserController(UserService userService)
+        private IUserRepository<User> _userService;
+        public UserController(IUserRepository<User> userService)
         {
             _userService= userService;
             
@@ -43,8 +45,8 @@ namespace ASP_MVC.Controllers
                 return RedirectToAction("Error", "Home");
             }
             /*
-             Video 29 Janvier 01:21:56 
-             jusqu'à 08:02 mais c'est à refaire (def de linjection de dependances)
+             Video 30 Janvier 59:52 
+             jusqu'à 03:02 mais c'est à refaire (def de linjection de dependances)
             */
         }
 
@@ -57,11 +59,14 @@ namespace ASP_MVC.Controllers
         // POST: UserController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(UserCreateForm form)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (!ModelState.IsValid) throw new ArgumentException();
+               Guid id= _userService.Insert(form.ToBLL());
+                return RedirectToAction(nameof(Details), new { id = id });
+                
             }
             catch
             {

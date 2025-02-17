@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BLL-Khaoula\BLL-Khaoula.csproj" />
+    <ProjectReference Include="..\Commun\Commun.csproj" />
     <ProjectReference Include="..\DAL-Khaoula\DAL-Khaoula.csproj" />
   </ItemGroup>
 

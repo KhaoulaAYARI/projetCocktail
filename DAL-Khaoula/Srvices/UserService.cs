@@ -1,4 +1,5 @@
-﻿using DAL_Khaoula.Entities;
+﻿using Commun.Repositories;
+using DAL_Khaoula.Entities;
 using DAL_Khaoula.Mappers;
 using Microsoft.Data.SqlClient;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DAL_Khaoula.Srvices
 {
-    public class UserService
+    public class UserService: IUserRepository<User>
     {
         private const string ConnectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=WAD24-DemoASP-DB;Integrated Security=True;Connect Timeout=60;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
         public IEnumerable<User> Get()

@@ -2,14 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <RootNamespace>BLL_Khaoula</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Commun\Commun.csproj" />
-    <ProjectReference Include="..\DAL-Khaoula\DAL-Khaoula.csproj" />
-  </ItemGroup>
 
 </Project>
