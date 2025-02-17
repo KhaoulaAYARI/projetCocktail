@@ -12,9 +12,9 @@ namespace BLL_Khaoula.Services
     public class UserService
     {
         private DAL_Khaoula.Srvices.UserService _service;
-        public UserService()
+        public UserService(DAL_Khaoula.Srvices.UserService userService)
         {
-            _service=new DAL_Khaoula.Srvices.UserService();
+            _service= userService;
         }
 
         public IEnumerable<User> Get()

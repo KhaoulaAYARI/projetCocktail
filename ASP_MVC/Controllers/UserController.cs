@@ -9,9 +9,9 @@ namespace ASP_MVC.Controllers
     public class UserController : Controller
     {
         private UserService _userService;
-        public UserController()
+        public UserController(UserService userService)
         {
-            _userService=new UserService();
+            _userService= userService;
             
         }
         // GET: UserController
@@ -27,18 +27,25 @@ namespace ASP_MVC.Controllers
 
                 return RedirectToAction("Error","Home");
             }
-            /*
-             Video 29 Janvier 01:17:51 
-             jusqu'à 32:51
-            */
+            
         }
 
         // GET: UserController/Details/5
         public ActionResult Details(Guid id)
         {
-
+            try
+            {
             UserDetails model = _userService.GetById(id).ToDetails();
                 return View(model);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+            /*
+             Video 29 Janvier 01:21:56 
+             jusqu'à 08:02 mais c'est à refaire (def de linjection de dependances)
+            */
         }
 
         // GET: UserController/Create

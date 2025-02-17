@@ -8,6 +8,9 @@ namespace ASP_MVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            //Ajout de nos services: Ceux de la BLL et ceux de la DAL
+                            builder.Services.AddScoped<BLL_Khaoula.Services.UserService>();
+            builder.Services.AddScoped<DAL_Khaoula.Srvices.UserService>();
 
             var app = builder.Build();
 
