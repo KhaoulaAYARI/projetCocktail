@@ -28,6 +28,7 @@ namespace ASP_MVC.Models.User
         [Required(ErrorMessage = "Le champ est obligatoire!")]
         [MaxLength(32, ErrorMessage = "au max 64 caractere")]
         [MinLength(8, ErrorMessage = "au max 8 caractere")]
+        [DataType(DataType.Password)]
         //[RegularExpression(@"")]
         public string Password { get; set; }
 

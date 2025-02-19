@@ -63,6 +63,7 @@ namespace ASP_MVC.Controllers
         {
             try
             {
+                if (!form.Consent) ModelState.AddModelError(nameof(form.Consent), "Vous devez lire et accepter les condictions d'utilisation");
                 if (!ModelState.IsValid) throw new ArgumentException();
                Guid id= _userService.Insert(form.ToBLL());
                 return RedirectToAction(nameof(Details), new { id = id });
@@ -75,18 +76,29 @@ namespace ASP_MVC.Controllers
         }
 
         // GET: UserController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            try
+            {
+                UserEditForm model = _userService.GetById(id).ToEditForm();
+                return View(model);
+            }
+            catch (Exception)
+            {
+
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         // POST: UserController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Guid id, UserEditForm form)
         {
             try
             {
+                if (!ModelState.IsValid) throw new ArgumentException();
+                _userService.Update(id, form.ToBLL());
                 return RedirectToAction(nameof(Index));
             }
             catch

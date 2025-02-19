@@ -9,10 +9,10 @@ namespace ConsoleTestKhaoula
     {
         static void Main(string[] args)
         {
-           UserService userService = new UserService();
-            Guid id = Guid.Parse("7418898e-51cb-4a01-a7aa-3f9281ed79aa");
-            User user = userService.GetById(id);
-            Console.WriteLine(user.First_Name);
+            /*UserService userService = new UserService();
+             Guid id = Guid.Parse("7418898e-51cb-4a01-a7aa-3f9281ed79aa");
+             User user = userService.GetById(id);
+             Console.WriteLine(user.First_Name);*/
 
             /*User user = new User(
             Guid.NewGuid(),
