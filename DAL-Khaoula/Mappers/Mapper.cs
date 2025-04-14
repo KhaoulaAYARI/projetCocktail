@@ -24,5 +24,21 @@ namespace DAL_Khaoula.Mappers
                 DisabledAt = (record[nameof(User.DisabledAt)] is DBNull) ? null : (DateTime?)record[nameof(User.DisabledAt)]
             };
         }
+
+        public static Cocktail ToCocktail(this IDataRecord record)
+        {
+            if (record == null) throw new ArgumentNullException();
+            return new Cocktail()
+            {
+                Cocktail_id = (Guid)record[nameof(Cocktail.Cocktail_id)],
+                Name = (string)record[nameof(Cocktail.Name)],
+                Description = (record[nameof(Cocktail.Description)]) is DBNull ? null : (string)record[nameof(Cocktail.Description)],
+                Instructions = (string)record[nameof(Cocktail.Instructions)],
+                CreatedAt = (DateTime)record[nameof(Cocktail.CreatedAt)],
+                CreatedBy = (record[(nameof(Cocktail.CreatedBy))]) is DBNull ? null : (Guid)record[nameof(Cocktail.CreatedBy)]
+
+            };
+        }
+
     }
 }
