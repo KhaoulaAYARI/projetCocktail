@@ -57,5 +57,56 @@ namespace DAL_Khaoula.Srvices
                 }
             }
         }
+
+        public Guid Insert(Cocktail cocktail) 
+        {
+            using (SqlConnection connection = new SqlConnection(ConnexionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SP_Cocktail_Insert";
+                    command.CommandType= CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue(nameof(Cocktail.Cocktail_id), cocktail.Cocktail_id);
+                    command.Parameters.AddWithValue(nameof(Cocktail.Name), cocktail.Name);
+                    command.Parameters.AddWithValue(nameof(Cocktail.Description), cocktail.Description);
+                    command.Parameters.AddWithValue(nameof(Cocktail.Instructions), cocktail.Instructions);
+                    connection.Open ();
+                    return (Guid)command.ExecuteScalar();
+                }
+            }
+        }
+        public void Update(Guid Cocktail_id, Cocktail cocktail)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnexionString))
+            {
+                using (SqlCommand command = connection.CreateCommand()) 
+                {
+                    command.CommandText = "SP_Cocktail_Update";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue(nameof(Cocktail.Cocktail_id), Cocktail_id);
+                    command.Parameters.AddWithValue(nameof(Cocktail.Name), cocktail.Name);
+                    command.Parameters.AddWithValue(nameof(Cocktail.Description), cocktail.Description);
+                    command.Parameters.AddWithValue(nameof(Cocktail.Instructions), cocktail.Instructions);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+        public void Delete(Guid cocktail_id) 
+        {
+            using (SqlConnection connection = new SqlConnection(ConnexionString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SP_Cocktail_Delete";
+                    command.CommandType= CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue(nameof(Cocktail.Cocktail_id), cocktail_id);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+
+        }
+
     }
 }
