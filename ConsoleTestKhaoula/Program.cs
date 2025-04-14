@@ -2,6 +2,8 @@
 //using DAL_Khaoula.Srvices;
 using BLL_Khaoula.Entities;
 using BLL_Khaoula.Services;
+using DAL_Khaoula.Entities;
+using DAL_Khaoula.Srvices;
 
 namespace ConsoleTestKhaoula
 {
@@ -9,6 +11,7 @@ namespace ConsoleTestKhaoula
     {
         static void Main(string[] args)
         {
+            //////////////// USER  ////////////////          
             /*UserService userService = new UserService();
              Guid id = Guid.Parse("7418898e-51cb-4a01-a7aa-3f9281ed79aa");
              User user = userService.GetById(id);
@@ -44,6 +47,13 @@ namespace ConsoleTestKhaoula
             //BLL Get() ok
             //BLL Insert() ok
             //BLL GetById() ok
+            
+            //////////////// COCKTAIL  ////////////////          
+            /*CocktailService service = new CocktailService();
+            foreach (Cocktail u in service.Get())
+            {
+                Console.WriteLine($"{u.Name} ");
+            }*/
 
         }
     }
