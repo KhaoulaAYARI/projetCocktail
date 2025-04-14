@@ -16,18 +16,18 @@ namespace BLL_Khaoula.Mappers
             {
                 throw new ArgumentNullException("user");
             }
-                return new BLL_Khaoula.Entities.User (
-                    user.User_Id, 
-                    user.First_Name, 
-                    user.Last_Name, 
-                    user.Email, 
-                    user.Password
-                   
-                    );
-            
+            return new BLL_Khaoula.Entities.User(
+                user.User_Id,
+                user.First_Name,
+                user.Last_Name,
+                user.Email,
+                user.Password
+
+                );
+
         }
 
-        public static D.User ToDAL(this User user) 
+        public static D.User ToDAL(this User user)
         {
             return new D.User()
             {
@@ -41,5 +41,31 @@ namespace BLL_Khaoula.Mappers
 
             };
         }
-    }
+
+        public static BLL_Khaoula.Entities.Cocktail ToBLL(this D.Cocktail cocktail)
+        {
+            if (cocktail is null) throw new ArgumentNullException(nameof(cocktail));
+            return new BLL_Khaoula.Entities.Cocktail(
+                cocktail.Cocktail_id,
+                cocktail.Name,
+                cocktail.Description,
+                cocktail.Instructions,
+                cocktail.CreatedAt,
+                cocktail.CreatedBy);
+        }
+        public static D.Cocktail ToDal(this Cocktail cocktail)
+        {
+            if (cocktail is null) throw new ArgumentNullException(nameof(cocktail));
+
+            return new D.Cocktail()
+            { 
+                Cocktail_id= cocktail.Cocktail_id,
+                Name= cocktail.Name,
+                Description=  cocktail.Description,
+                Instructions= cocktail.Instructions,
+                CreatedAt= cocktail.CreatedAt,
+                CreatedBy= cocktail.CreatedBy
+            };
+         }
+    } 
 }

@@ -47,14 +47,21 @@ namespace ConsoleTestKhaoula
             //BLL Get() ok
             //BLL Insert() ok
             //BLL GetById() ok
-            
+
             //////////////// COCKTAIL  ////////////////          
-            /*CocktailService service = new CocktailService();
+            /*Test DAL ok
+             * CocktailService service = new CocktailService();
             foreach (Cocktail u in service.Get())
             {
                 Console.WriteLine($"{u.Name} ");
             }*/
 
+            /*Test BLL OK
+             * BLL_Khaoula.Services.CocktailService service = new BLL_Khaoula.Services.CocktailService();
+            foreach (BLL_Khaoula.Entities.Cocktail u in service.Get())
+            {
+                Console.WriteLine($"{u.Name} ");
+            }*/
         }
     }
 }
