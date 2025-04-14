@@ -1,10 +1,13 @@
-﻿using ASP_MVC.Models.User;
+﻿using ASP_MVC.Models.Cocktail;
+using ASP_MVC.Models.User;
 using BLL_Khaoula.Entities;
 
 namespace ASP_MVC.Mappers
 {
     internal static class Mapper
     {
+        ///////////  User   ///////////
+
         public static UserListItem ToListItem(this User user)
         {
             if (user == null) { throw new ArgumentNullException(nameof(user)); }
@@ -70,6 +73,18 @@ namespace ASP_MVC.Mappers
                 First_Name = user.First_Name,
                 Last_Name = user.Last_Name,
                 Email = user.Email
+            };
+        }
+        ///////////  Cocktail   ///////////
+        
+        public static CocktailListItem ToListItem(this Cocktail cocktail)
+        {
+            if (cocktail == null) throw new ArgumentNullException(nameof(cocktail));
+            return new CocktailListItem() 
+            {
+                Cocktail_id=cocktail.Cocktail_id,
+                Name=cocktail.Name,
+                Description=cocktail.Description
             };
         }
     }
