@@ -1,5 +1,6 @@
 ﻿using BLL_Khaoula.Entities;
 using BLL_Khaoula.Mappers;
+using Commun.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace BLL_Khaoula.Services
 {
-    public class CocktailService
+    public class CocktailService:ICocktailRepository<Cocktail>
     {
-        private DAL_Khaoula.Srvices.CocktailService _service;
-        public CocktailService()
+        private ICocktailRepository<DAL_Khaoula.Entities.Cocktail> _service;
+        public CocktailService(ICocktailRepository<DAL_Khaoula.Entities.Cocktail> cocktailService)
         {
-            _service =new DAL_Khaoula.Srvices.CocktailService();
+            _service = cocktailService;
         }
         public IEnumerable<Cocktail> Get()
         {

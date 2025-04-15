@@ -12,7 +12,10 @@ namespace ASP_MVC
             builder.Services.AddControllersWithViews();
             //Ajout de nos services: Ceux de la BLL et ceux de la DAL
             builder.Services.AddScoped < IUserRepository < BLL_Khaoula.Entities.User>,BLL_Khaoula.Services.UserService>();
-                      builder.Services.AddScoped<IUserRepository<DAL_Khaoula.Entities.User>,DAL_Khaoula.Srvices.UserService>();
+           builder.Services.AddScoped<IUserRepository<DAL_Khaoula.Entities.User>,DAL_Khaoula.Srvices.UserService>();
+
+            builder.Services.AddScoped<ICocktailRepository<BLL_Khaoula.Entities.Cocktail>, BLL_Khaoula.Services.CocktailService>();
+            builder.Services.AddScoped<ICocktailRepository<DAL_Khaoula.Entities.Cocktail>, DAL_Khaoula.Srvices.CocktailService>();
 
             var app = builder.Build();
 

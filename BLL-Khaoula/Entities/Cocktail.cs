@@ -27,5 +27,14 @@ namespace BLL_Khaoula.Entities
             CreatedBy = createdBy;
         }
 
+        public Cocktail( string name, string? description, string instructions)
+        {
+            
+            Name = name;
+            Description = description;
+            Instructions = instructions;
+            
+        }
+
     }
 }

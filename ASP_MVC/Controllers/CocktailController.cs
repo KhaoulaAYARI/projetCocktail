@@ -1,6 +1,8 @@
 ﻿using ASP_MVC.Mappers;
 using ASP_MVC.Models.Cocktail;
+using BLL_Khaoula.Entities;
 using BLL_Khaoula.Services;
+using Commun.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,10 +10,10 @@ namespace ASP_MVC.Controllers
 {
     public class CocktailController : Controller
     {
-        private CocktailService _service;
-        public CocktailController()
+        private ICocktailRepository<Cocktail> _service;
+        public CocktailController(ICocktailRepository<Cocktail> service)
         {
-            _service = new CocktailService();
+            _service = service;
         }
         // GET: CocktailController
         public ActionResult Index()
@@ -29,9 +31,18 @@ namespace ASP_MVC.Controllers
         }
 
         // GET: CocktailController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(Guid id)
         {
-            return View();
+            try
+            {
+                CocktailDetails model = _service.GetById(id).ToDetails();
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction("Error", "Home");
+            }
         }
 
         // GET: CocktailController/Create
@@ -43,32 +54,47 @@ namespace ASP_MVC.Controllers
         // POST: CocktailController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(CocktailCreateForm form)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (!ModelState.IsValid) throw new ArgumentException();
+                Guid id =_service.Insert(form.ToBLL());
+
+                return RedirectToAction(nameof(Details), new {id=id});
             }
             catch
             {
-                return View();
+                return RedirectToAction("Error", "Home");
+
             }
         }
 
         // GET: CocktailController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            try
+            {
+                CocktailEditForm model = _service.GetById(id).ToEditForm();
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         // POST: CocktailController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Guid id, CocktailEditForm form)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (!ModelState.IsValid) throw new ArgumentException(nameof(form));
+                _service.Update(id,form.ToBLL());
+                return RedirectToAction(nameof(Details),new {id});
             }
             catch
             {
