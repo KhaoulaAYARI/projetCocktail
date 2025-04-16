@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using ASP_MVC.Models.Cocktail;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace ASP_MVC.Models.User
@@ -25,6 +26,10 @@ namespace ASP_MVC.Models.User
         [DataType(DataType.Date)]
 
         public DateOnly CreatedAt { get; set; }
+
+        [DisplayName("Vos cocktails")]
+        public IEnumerable<CocktailListItem> Cocktails { get; set; }
+
 
 
     }

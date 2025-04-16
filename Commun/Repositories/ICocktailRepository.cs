@@ -13,6 +13,7 @@ namespace Commun.Repositories
         public void Delete(Guid Cocktail_id);
         public Guid Insert(TCocktail cocktail);
         public void Update(Guid Cocktail_id, TCocktail cocktail);
+        IEnumerable<TCocktail> GetFromUser(Guid user_id);
 
     }
 }

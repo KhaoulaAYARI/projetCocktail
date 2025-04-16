@@ -17,6 +17,7 @@ namespace BLL_Khaoula.Entities
         public DateTime _createdAt;
         public DateOnly CreatedAt { get { return DateOnly.FromDateTime(_createdAt); } }
         public Guid? CreatedBy { get; set; }
+        public User? Creator { get; set; }  
 
 
         public Cocktail(Guid cocktail_id, string name, string? description, string instructions, DateTime createdAt, Guid? createdBy)

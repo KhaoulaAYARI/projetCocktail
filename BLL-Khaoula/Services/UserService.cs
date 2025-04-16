@@ -12,35 +12,39 @@ namespace BLL_Khaoula.Services
 {
     public class UserService: IUserRepository<User>
     {
-        private IUserRepository<D.User> _service;
-        public UserService(IUserRepository<D.User> userService)
+        private IUserRepository<D.User> _userService;
+        private ICocktailRepository<D.Cocktail> _cocktailService;
+        public UserService(IUserRepository<D.User> userService, ICocktailRepository<D.Cocktail> cocktailService )
         {
-            _service= userService;
+            _userService = userService;
+            _cocktailService = cocktailService;
         }
 
         public IEnumerable<User> Get()
         {
-            return _service.Get().Select(dal=>dal.ToBLL());
+            return _userService.Get().Select(dal=>dal.ToBLL());
         }
         public User GetById(Guid id) 
         {
-            return _service.GetById(id).ToBLL();
+            User user= _userService.GetById(id).ToBLL();
+            user.Cocktails=_cocktailService.GetFromUser(id).Select(dal=>dal.ToBLL());
+            return user;
         }
         public Guid Insert(User user)
         {
-           return _service.Insert(user.ToDAL());
+           return _userService.Insert(user.ToDAL());
         }
         public void Update (Guid id, User user)
         {
-            _service.Update(id, user.ToDAL());
+            _userService.Update(id, user.ToDAL());
         }
         public void Delete(Guid id)
         {
-            _service.Delete(id);
+            _userService.Delete(id);
         }
         public Guid CheckPassword( string email,string password) 
         { 
-            return _service.CheckPassword(email, password);
+            return _userService.CheckPassword(email, password);
         }
     }
 }

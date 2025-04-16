@@ -11,31 +11,50 @@ namespace BLL_Khaoula.Services
 {
     public class CocktailService:ICocktailRepository<Cocktail>
     {
-        private ICocktailRepository<DAL_Khaoula.Entities.Cocktail> _service;
-        public CocktailService(ICocktailRepository<DAL_Khaoula.Entities.Cocktail> cocktailService)
+        private ICocktailRepository<DAL_Khaoula.Entities.Cocktail> _cocktailService;
+        private IUserRepository<DAL_Khaoula.Entities.User> _userService;
+        public CocktailService(ICocktailRepository<DAL_Khaoula.Entities.Cocktail> cocktailService, IUserRepository<DAL_Khaoula.Entities.User> userService)
         {
-            _service = cocktailService;
+            _cocktailService = cocktailService;
+            _userService = userService;
         }
         public IEnumerable<Cocktail> Get()
         {
-            return _service.Get().Select(b=>b.ToBLL());
+            IEnumerable<Cocktail> Cocktails= _cocktailService.Get().Select(b=>b.ToBLL());
+            foreach(Cocktail cocktail in Cocktails)
+            {
+                if (cocktail.CreatedBy is not null)
+                {
+                    cocktail.Creator = _userService.GetById((Guid)cocktail.CreatedBy).ToBLL();
+                }
+            }
+            return Cocktails;
         }
         public Cocktail GetById(Guid Cocktail_id)
         {
-            return _service.GetById(Cocktail_id).ToBLL();
+            Cocktail cocktail= _cocktailService.GetById(Cocktail_id).ToBLL();
+            if (cocktail.CreatedBy is not null) 
+            {
+                cocktail.Creator = _userService.GetById((Guid)cocktail.CreatedBy).ToBLL();
+            }
+            return cocktail;
         }
         public void Delete(Guid Cocktail_id) 
         {
-            _service.Delete(Cocktail_id);
+            _cocktailService.Delete(Cocktail_id);
         }
         public Guid Insert(Cocktail cocktail) 
         {
-            return _service.Insert(cocktail.ToDal());
+            return _cocktailService.Insert(cocktail.ToDal());
         }
         public void Update(Guid Cocktail_id ,Cocktail cocktail ) 
         {
-            _service.Update(Cocktail_id, cocktail.ToDal());
+            _cocktailService.Update(Cocktail_id, cocktail.ToDal());
         }
 
+        public IEnumerable<Cocktail> GetFromUser(Guid user_id)
+        {
+            return _cocktailService.GetFromUser(user_id).Select(dal=>dal.ToBLL());
+        }
     }
 }

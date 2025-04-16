@@ -109,7 +109,26 @@ namespace DAL_Khaoula.Srvices
             }
 
         }
-        
 
+        public IEnumerable<Cocktail> GetFromUser(Guid user_id)
+        {
+            using (SqlConnection connexion = new SqlConnection(ConnexionString))
+            {
+                using (SqlCommand command = connexion.CreateCommand())
+                {
+                    command.CommandText = "SP_Cocktail_GetByUserId";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue(nameof(user_id), user_id);  
+                    connexion.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            yield return reader.ToCocktail();
+                        }
+                    }
+                }
+            }
+        }
     }
 }

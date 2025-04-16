@@ -38,6 +38,7 @@ namespace BLL_Khaoula.Entities
         {
             get {return _disabledAt is not null; }
         }
+        public IEnumerable<Cocktail> Cocktails { get; set; }
 
         
 

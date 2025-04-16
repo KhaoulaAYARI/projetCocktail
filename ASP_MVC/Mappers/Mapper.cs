@@ -29,7 +29,8 @@ namespace ASP_MVC.Mappers
                 First_Name = user.First_Name,
                 Last_Name = user.Last_Name,
                 Email = user.Email,
-                CreatedAt = DateOnly.FromDateTime(user.CreatedAt)
+                CreatedAt = DateOnly.FromDateTime(user.CreatedAt),
+                Cocktails=user.Cocktails.Select(bll=>bll.ToListItem())
             };
         }
 
@@ -101,7 +102,8 @@ namespace ASP_MVC.Mappers
                 Instructions = cocktail.Instructions,
                 //CreatedAt=DateOnly.FromDateTime(cocktail.CreatedAt),
                 CreatedAt = cocktail.CreatedAt,
-                CreatedBy = cocktail.CreatedBy
+                Creator = (cocktail.Creator is null) ? null : $"{cocktail.Creator.First_Name} {cocktail.Creator.Last_Name}",
+                CreatedBy=cocktail.CreatedBy
             };
         }
 

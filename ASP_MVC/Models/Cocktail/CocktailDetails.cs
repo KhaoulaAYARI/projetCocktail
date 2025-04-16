@@ -30,6 +30,8 @@ namespace ASP_MVC.Models.Cocktail
 
 
         [DisplayName("Createur de Cocktail")]
+        public string? Creator { get; set; }
+        [ScaffoldColumn(false)]
         public Guid? CreatedBy { get; set; }
     }
 }
