@@ -2,6 +2,7 @@
 using ASP_MVC.Models.User;
 using BLL_Khaoula.Entities;
 using DAL_Khaoula.Entities;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace ASP_MVC.Mappers
 {
@@ -27,12 +28,12 @@ namespace ASP_MVC.Mappers
                 User_Id = user.User_Id,
                 First_Name = user.First_Name,
                 Last_Name = user.Last_Name,
-                Email=user.Email,
+                Email = user.Email,
                 CreatedAt = DateOnly.FromDateTime(user.CreatedAt)
             };
         }
 
-        public static BLL_Khaoula.Entities.User ToBLL(this UserCreateForm user) 
+        public static BLL_Khaoula.Entities.User ToBLL(this UserCreateForm user)
         {
             if (user == null) { throw new ArgumentNullException(nameof(user)); }
             return new BLL_Khaoula.Entities.User(
@@ -54,7 +55,7 @@ namespace ASP_MVC.Mappers
                 Email = user.Email
             };
         }
-        public static BLL_Khaoula.Entities.User ToBLL (this UserEditForm user)
+        public static BLL_Khaoula.Entities.User ToBLL(this UserEditForm user)
         {
             if (user == null) { throw new ArgumentNullException(nameof(user)); }
             return new BLL_Khaoula.Entities.User(
@@ -77,44 +78,45 @@ namespace ASP_MVC.Mappers
             };
         }
         ///////////  Cocktail   ///////////
-        
+
         public static CocktailListItem ToListItem(this BLL_Khaoula.Entities.Cocktail cocktail)
         {
             if (cocktail == null) throw new ArgumentNullException(nameof(cocktail));
-            return new CocktailListItem() 
+            return new CocktailListItem()
             {
-                Cocktail_id=cocktail.Cocktail_id,
-                Name=cocktail.Name,
-                Description=cocktail.Description
+                Cocktail_id = cocktail.Cocktail_id,
+                Name = cocktail.Name,
+                Description = cocktail.Description
             };
         }
 
-        public static CocktailDetails ToDetails (this BLL_Khaoula.Entities.Cocktail cocktail)
+        public static CocktailDetails ToDetails(this BLL_Khaoula.Entities.Cocktail cocktail)
         {
             if (cocktail == null) throw new ArgumentNullException(nameof(cocktail));
-            return new CocktailDetails() 
+            return new CocktailDetails()
             {
                 Cocktail_id = cocktail.Cocktail_id,
                 Name = cocktail.Name,
                 Description = cocktail.Description,
                 Instructions = cocktail.Instructions,
-                CreatedAt=DateOnly.FromDateTime(cocktail.CreatedAt),
-                CreatedBy=cocktail.CreatedBy
+                //CreatedAt=DateOnly.FromDateTime(cocktail.CreatedAt),
+                CreatedAt = cocktail.CreatedAt,
+                CreatedBy = cocktail.CreatedBy
             };
         }
 
-        public static BLL_Khaoula.Entities.Cocktail ToBLL(this CocktailCreateForm form)
+        public static BLL_Khaoula.Entities.Cocktail ToBLL(this CocktailCreateForm cocktail)
         {
-            if (form == null) throw new ArgumentNullException(nameof(form));
+            if (cocktail == null) throw new ArgumentNullException(nameof(cocktail));
             return new BLL_Khaoula.Entities.Cocktail(
                 Guid.Empty,
-                form.Name,
-                form.Description,
-                form.Instructions,
+                cocktail.Name,
+                cocktail.Description,
+                cocktail.Instructions,
                 DateTime.Now,
-                form.CreatedBy
+                cocktail.CreatedBy
                 );
-            
+
         }
 
         public static CocktailEditForm ToEditForm(this BLL_Khaoula.Entities.Cocktail cocktail)
@@ -124,7 +126,7 @@ namespace ASP_MVC.Mappers
             {
                 Name = cocktail.Name,
                 Description = cocktail.Description,
-                Instructions= cocktail.Instructions
+                Instructions = cocktail.Instructions
             };
         }
 
@@ -141,5 +143,19 @@ namespace ASP_MVC.Mappers
                 );
 
         }
+
+        public static CocktailDelete ToDeleteForm(this BLL_Khaoula.Entities.Cocktail cocktail)
+        {
+            if (cocktail == null) throw new ArgumentNullException(nameof(cocktail));
+            return new CocktailDelete()
+            {
+                Name = cocktail.Name,
+                Description = cocktail.Description
+
+            };
+
+        }
+
+       
     }
 }

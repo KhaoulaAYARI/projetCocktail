@@ -63,8 +63,8 @@ namespace BLL_Khaoula.Mappers
                 Name= cocktail.Name,
                 Description=  cocktail.Description,
                 Instructions= cocktail.Instructions,
-                CreatedAt= cocktail.CreatedAt,
-                CreatedBy= cocktail.CreatedBy
+                CreatedAt = cocktail.CreatedAt.ToDateTime(new TimeOnly()),
+                CreatedBy = cocktail.CreatedBy
             };
          }
     } 

@@ -27,7 +27,7 @@ namespace DAL_Khaoula.Mappers
 
         public static Cocktail ToCocktail(this IDataRecord record)
         {
-            if (record == null) throw new ArgumentNullException();
+            if (record == null) throw new ArgumentNullException(nameof(record));
             return new Cocktail()
             {
                 Cocktail_id = (Guid)record[nameof(Cocktail.Cocktail_id)],

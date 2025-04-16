@@ -58,14 +58,14 @@ namespace ASP_MVC.Controllers
         {
             try
             {
-                if (!ModelState.IsValid) throw new ArgumentException();
+                if (!ModelState.IsValid) throw new ArgumentException(nameof(form));
                 Guid id =_service.Insert(form.ToBLL());
 
-                return RedirectToAction(nameof(Details), new {id=id});
+                return RedirectToAction(nameof(Details), new {id});
             }
             catch
             {
-                return RedirectToAction("Error", "Home");
+                return View();
 
             }
         }
@@ -103,18 +103,28 @@ namespace ASP_MVC.Controllers
         }
 
         // GET: CocktailController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
-            return View();
+            try
+            {
+                CocktailDelete model = _service.GetById(id).ToDeleteForm();
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         // POST: CocktailController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Guid id, CocktailDelete form)
         {
             try
             {
+                _service.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

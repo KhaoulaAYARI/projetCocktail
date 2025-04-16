@@ -13,7 +13,9 @@ namespace BLL_Khaoula.Entities
         public string Name { get; set; }
         public string? Description { get; set; }
         public string Instructions { get; set; }
-        public DateTime CreatedAt { get; set; }
+        //public DateTime CreatedAt { get; set; }
+        public DateTime _createdAt;
+        public DateOnly CreatedAt { get { return DateOnly.FromDateTime(_createdAt); } }
         public Guid? CreatedBy { get; set; }
 
 
@@ -23,7 +25,7 @@ namespace BLL_Khaoula.Entities
             Name = name;
             Description = description;
             Instructions = instructions;
-            CreatedAt = createdAt;
+            _createdAt = createdAt;
             CreatedBy = createdBy;
         }
 

@@ -67,10 +67,11 @@ namespace DAL_Khaoula.Srvices
                 {
                     command.CommandText = "SP_Cocktail_Insert";
                     command.CommandType= CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue(nameof(Cocktail.Cocktail_id), cocktail.Cocktail_id);
+                    //command.Parameters.AddWithValue(nameof(Cocktail.Cocktail_id), cocktail.Cocktail_id);
                     command.Parameters.AddWithValue(nameof(Cocktail.Name), cocktail.Name);
-                    command.Parameters.AddWithValue(nameof(Cocktail.Description), cocktail.Description);
+                    command.Parameters.AddWithValue(nameof(Cocktail.Description), (object?)cocktail.Description?? DBNull.Value);
                     command.Parameters.AddWithValue(nameof(Cocktail.Instructions), cocktail.Instructions);
+                    command.Parameters.AddWithValue("user_id",(object?)cocktail.CreatedBy?? DBNull.Value);
                     connection.Open ();
                     return (Guid)command.ExecuteScalar();
                 }

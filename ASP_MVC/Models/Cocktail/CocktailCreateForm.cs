@@ -13,15 +13,15 @@ namespace ASP_MVC.Models.Cocktail
 
 
         [DisplayName("Description")]
-        [MaxLength(64, ErrorMessage = "le champ doit contenir au max 512 caracteres")]
+        [MaxLength(512, ErrorMessage = "le champ doit contenir au max 512 caracteres")]
         [MinLength(2, ErrorMessage = "le champ doit contenir au min 2 caracteres")]
-        [DataType(DataType.MultilineText)]
+        //[DataType(DataType.MultilineText)]
         public string? Description { get; set; }
 
 
         [DisplayName("Instructions")]
         [Required(ErrorMessage = "Le champ Instructions est obligatoire")]
-        [MaxLength(64, ErrorMessage = "le champ doit contenir au max 512 caracteres")]
+        //[MaxLength(64, ErrorMessage = "le champ doit contenir au max 512 caracteres")]
         [MinLength(2, ErrorMessage = "le champ doit contenir au min 2 caracteres")]
         [DataType(DataType.MultilineText)]
         public string Instructions { get; set; }
